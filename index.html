@@ -192,6 +192,12 @@
       margin-left: 8px;
     }
 
+    .track-art {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
     @media (max-width: 760px) {
       .nav {
         grid-template-columns: repeat(2, 1fr);
@@ -278,27 +284,17 @@
     <div class="subhead">currently listening...</div>
     <hr>
 
-    <div class="song">
-      <div class="thumb">?</div>
-      <div><a href="#">???</a> - ???</div>
-    </div>
-    
-    <div class="subhead">recent tracks</div>
-    <hr>
-    <div class="song">
-      <div class="thumb">?</div>
-      <div><a href="#">???</a> - ???</div>
-    </div>
-    <div class="song">
-      <div class="thumb">?</div>
-      <div><a href="#">???</a> - ???</div>
-    </div>
-    <div class="song">
-      <div class="thumb">?</div>
-      <div><a href="#">???</a> - ???</div>
-    </div>
+    <div id="now-playing" class="song">
+  <div class="thumb">♪</div>
+  <div>loading...</div>
+</div>
 
-    <div class="section-title">my schizophrenic opinions</div>
+<div class="subhead">recent tracks</div>
+<hr>
+
+<div id="recent-tracks"></div>
+
+    <div class="section-title">schizophrenic opinions</div>
     <div class="grid">
       <div class="card">
         <h4><strong>calc 1</strong></h4>
@@ -355,5 +351,78 @@
 <br>
     <hr>
   </div>
+<script>
+  const LASTFM_USER = "mothify";
+  const LASTFM_KEY = "3003f6a0ae7bb113f2b3198d6ce5755e";
+
+  async function loadLastFM() {
+    const url =
+      `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks` +
+      `&user=${encodeURIComponent(LASTFM_USER)}` +
+      `&api_key=${LASTFM_KEY}` +
+      `&format=json&limit=4`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      const tracks = data?.recenttracks?.track || [];
+
+      const nowPlayingEl = document.getElementById("now-playing");
+      const recentTracksEl = document.getElementById("recent-tracks");
+
+      if (!tracks.length) {
+        nowPlayingEl.innerHTML = `
+          <div class="thumb">?</div>
+          <div>nothing found</div>
+        `;
+        recentTracksEl.innerHTML = "";
+        return;
+      }
+
+      const first = tracks[0];
+      const isNowPlaying = first["@attr"]?.nowplaying === "true";
+      const firstImage = first.image?.[2]?.["#text"] || first.image?.[1]?.["#text"] || "";
+
+      nowPlayingEl.innerHTML = `
+        <div class="thumb">
+          ${firstImage ? `<img src="${firstImage}" alt="" class="track-art">` : "♪"}
+        </div>
+        <div>
+          <a href="${first.url}" target="_blank" rel="noopener noreferrer">${first.name}</a>
+          - ${first.artist["#text"]}
+          <br>
+          <small>${isNowPlaying ? "now playing" : "last played"}</small>
+        </div>
+      `;
+
+      const recent = isNowPlaying ? tracks.slice(1, 4) : tracks.slice(0, 3);
+
+      recentTracksEl.innerHTML = recent.map(track => {
+        const image = track.image?.[2]?.["#text"] || track.image?.[1]?.["#text"] || "";
+        return `
+          <div class="song">
+            <div class="thumb">
+              ${image ? `<img src="${image}" alt="" class="track-art">` : "♪"}
+            </div>
+            <div>
+              <a href="${track.url}" target="_blank" rel="noopener noreferrer">${track.name}</a>
+              - ${track.artist["#text"]}
+            </div>
+          </div>
+        `;
+      }).join("");
+    } catch (err) {
+      document.getElementById("now-playing").innerHTML = `
+        <div class="thumb">?</div>
+        <div>failed to load music</div>
+      `;
+      document.getElementById("recent-tracks").innerHTML = "";
+      console.error(err);
+    }
+  }
+
+  loadLastFM();
+  setInterval(loadLastFM, 30000);
+</script>
 </body>
 </html>
