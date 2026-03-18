@@ -276,6 +276,7 @@ th, td {
   font-size: inherit;
   font-weight: normal;
 }
+
     /* Glow effects */
     .section-title {
       box-shadow: 0 0 10px rgba(255,255,255,0.4), 0 0 20px rgba(255,255,255,0.2);
@@ -308,6 +309,18 @@ th, td {
     .header {
       text-shadow: 0 0 15px rgba(255,255,255,0.9);
     }
+    .highlight {
+      text-shadow: 0 0 15px rgba(255,255,255,0.9);
+    }
+    .glow {
+      color: #ff4fd8;
+      text-shadow:
+        0 0 5px #ff4fd8,
+        0 0 10px #ff4fd8,
+        0 0 20px #ff4fd8,
+        0 0 40px #ff00cc,
+        0 0 80px #ff00cc;
+    }
   </style>
 </head>
 
@@ -339,7 +352,8 @@ th, td {
   inputmode="decimal"
   oninput="calculateResult()"
 /> ...</p>
-  for R30s (Robotablets 30mg) >.<
+  for R30s
+<a href="https://www.reddit.com/r/dxm/comments/1jjw7yo/read_me_proper_harm_reduction_misinformation/" class="glow" target="_blank" style="text-decoration: none" rel="noopener noreferrer">(Robatablets 30mg)</a> >.<
 </div>
 </div>
     <hr>
@@ -352,7 +366,7 @@ th, td {
 
       <tr>
         <td>3rd:</td>
-        <td id="result2"></td>
+        <td id="result2" class="highlight"></td>
         <td id="result" class="highlight"></td>
       </tr>
 
