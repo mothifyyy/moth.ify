@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+  if (window.location.hostname.startsWith("www.")) {
+    const newUrl = window.location.protocol + "//" + window.location.hostname.replace("www.", "") + window.location.pathname + window.location.search + window.location.hash;
+    window.history.replaceState(null, "", newUrl);
+  }
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mothify.net</title>
