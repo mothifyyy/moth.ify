@@ -221,8 +221,61 @@
         align-items: flex-start;
         gap: 6px;
       }
+      
     }
-  
+  .info-text {
+  border-left: 3px solid white;
+  padding-left: 12px;
+  margin-left: 6px;
+}
+
+.info-text p {
+  margin: 14px 0;
+}
+    
+input {
+  font-size: 14px;
+  padding: 2px 2px;
+  width: 71px;
+}
+
+#result {
+  margin-top: 0px;
+  font-size: 15px;
+  font-weight: bold;
+}
+    
+#result2 {
+  margin-top: 0px;
+  font-size: 15px;
+  font-weight: bold;
+}
+    
+#result3 {
+  margin-top: 0px;
+  font-size: 15px;
+  font-weight: bold;
+}
+    
+#result4 {
+  margin-top: 0px;
+  font-size: 15px;
+  font-weight: bold;
+}   
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px 20px 8px 0;
+  text-align: left;
+}
+
+.highlight {
+  font-size: inherit;
+  font-weight: normal;
+}
     /* Glow effects */
     .section-title {
       box-shadow: 0 0 10px rgba(255,255,255,0.4), 0 0 20px rgba(255,255,255,0.2);
@@ -252,17 +305,9 @@
       box-shadow: 0 0 8px rgba(255,255,255,0.2);
     }
 
-.info-text {
-  border-left: 3px solid white;
-  padding-left: 12px;
-  margin-left: 6px;
-}
-
-.info-text p {
-  margin: 14px 0;
-}
-    
-    .section-title::after {
+    .header {
+      text-shadow: 0 0 15px rgba(255,255,255,0.9);
+    }
   </style>
 </head>
 
@@ -284,10 +329,71 @@
     </nav>
 
 <hr>
+<div class="subhead">
 <div class="info-text">
-  <p>dissociatives + hallucinogens + a touch of mental illness</p>
+  <p>ur weight in lbs 
+<input 
+  type="text" 
+  id="numberInput" 
+  placeholder="⸜(˃ ᵕ ˂ )⸝♡"
+  inputmode="decimal"
+  oninput="calculateResult()"
+/> ...</p>
+  for R30s (Robotablets 30mg) >.<
+</div>
 </div>
     <hr>
-  </div>
+  <table>
+      <tr class="header">
+        <th><u><b>Plateau</b></u></th>
+        <th><u><b>Minimum</b></u></th>
+        <th><u><b>Maximum</b></u></th>
+      </tr>
+
+      <tr>
+        <td>3rd:</td>
+        <td id="result2"></td>
+        <td id="result" class="highlight"></td>
+      </tr>
+
+      <tr>
+        <td>4th:</td>
+        <td id="result3" class="highlight"></td>
+        <td id="result4" class="highlight"></td>
+      </tr>
+    </table>
+<script>
+  function roundUpToTwoDecimals(num) {
+    return (Math.ceil(num * 100) / 100).toFixed(2);
+  }
+
+  function calculateResult() {
+    const input = parseFloat(document.getElementById("numberInput").value);
+
+    const r1 = document.getElementById("result");
+    const r2 = document.getElementById("result2");
+    const r3 = document.getElementById("result3");
+    const r4 = document.getElementById("result4");
+
+    if (isNaN(input)) {
+      r1.textContent = "";
+      r2.textContent = "";
+      r3.textContent = "";
+      r4.textContent = "";
+      return;
+    }
+
+    const result1 = input * 0.16622610072265843;
+    const result2 = input * 0.08311305036132921;
+    const result3 = input * 0.16622610072265843;
+    const result4 = input * 0.22163480096354458;
+
+    r1.textContent = roundUpToTwoDecimals(result1);
+    r2.textContent = roundUpToTwoDecimals(result2);
+    r3.textContent = roundUpToTwoDecimals(result3);
+    r4.textContent = roundUpToTwoDecimals(result4);
+  }
+</script>
+    <hr>
 </body>
 </html>
