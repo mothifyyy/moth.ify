@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mothify.net</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --panel: #0a0a0a;
+      --text: #ffffff;
+      --muted: #bbbbbb;
+      --accent: #ffffff;
+      --line: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Courier New", Courier, monospace;
+      line-height: 1.35;
+      padding: 18px;
+    }
+
+    .frame {
+      padding-left: 20px;
+      max-width: 920px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.72);
+      padding: 10px 10px 22px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 2px 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .topbar .right {
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+  .nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0px;
+    margin-bottom: 18px;
+    border: 1px solid #000000;
+    background: #d6d6d6;
+  }
+
+    .nav a {
+      background: #d6d6d6;
+      color: #000000;
+      text-decoration: none;
+      text-align: center;
+      border: 1px solid #000000;
+      padding: 4px 4px;
+      font-weight: 700;
+      width: 900px;
+    }
+
+    .nav a:hover {
+      filter: brightness(1.08);
+    }
+
+    .section-title {
+      position: relative;
+      margin: 20px 0 10px;
+      padding: 3px 12px;
+      background: linear-gradient(90deg, #ffffff, #999999);
+      color: #000000;
+      text-align: right;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .intro, .small-note, .box, .song {
+      margin: 10px 8px 16px;
+    }
+
+    .intro {
+      font-size: 1.05rem;
+    }
+
+    .small-note em {
+      font-weight: 700;
+      color: var(--line);
+    }
+
+    .subhead {
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 18px 8px 10px;
+    }
+
+    .box,
+    .song {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      padding: 10px;
+    }
+
+    .thumb {
+      width: 56px;
+      height: 56px;
+      flex: 0 0 56px;
+      display: grid;
+      place-items: center;
+      font-size: 1.7rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: linear-gradient(135deg, #ffffff, #555555);
+    }
+
+    .box strong,
+    .song a,
+    .links a {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .song a,
+    .links a {
+      text-decoration-thickness: 1px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 8px;
+    }
+
+    .card {
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 12px;
+      background: rgba(255,255,255,0.02);
+      min-height: 110px;
+    }
+
+    .card h4 {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .links {
+      margin: 6px 8px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .link-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 10px;
+      padding: 3px 0;
+      border-bottom: 1px solid #ffffff;
+    }
+
+    .footer {
+      margin: 24px 8px 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      text-align: right;
+    }
+
+    .footer a {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .stars {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .math-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .link-row {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+  
+    /* Glow effects */
+    .section-title {
+      box-shadow: 0 0 10px rgba(255,255,255,0.4), 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    .nav a {
+      box-shadow: inset 0 0 0px rgba(255,255,255,0.5);
+    }
+
+    .nav a:hover {
+      box-shadow: 0 0 0px rgba(255,255,255,0.8);
+    }
+
+    a {
+      text-shadow: 0 0 4px rgba(255,255,255,0.8);
+    }
+
+    .topbar {
+      text-shadow: 0 0 6px rgba(255,255,255,0.6);
+    }
+
+    .thumb {
+      box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
+
+    .box, .song {
+      box-shadow: 0 0 8px rgba(255,255,255,0.2);
+    }
+
+.info-text {
+  border-left: 3px solid white;
+  padding-left: 12px;
+  margin-left: 6px;
+}
+
+.info-text p {
+  margin: 14px 0;
+}
+    
+    .section-title::after {
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+
+    <div class="topbar">
+      <div>mothify.net</div>
+      <div class="right">
+  </div>
+      <a href="https://steamcommunity.com/my" style="text-decoration: none; color: white;">✖</a>
+    </div>
+
+    <nav class="nav">
+      <a href="/">home</a>
+      <a href="/meow/">my babies</a>
+      <a href="/enlightened/">talk to god</a>
+      <a href="/info/">info</a>
+    </nav>
+
+    <div class="section-title">information</div>
+<hr>
+<div class="info-text">
+  <p>this is a dumb little website i put together after getting inspired by some really cute personal websites</p>
+</div>
+<div class="info-text">
+      <div class="section">
+      <strong><u>about me:</u></strong><br>
+      currently in college studying math<br>
+      why? i love the feeling of understanding abstract concepts<br>
+      theres something really satisfying about watching a messy idea slowly shape into clarity<br>
+      does this mean im good at math? --- FUCK NO<br>
+      <br>
+      i mainly play one game: <strong>Counter Strike 2</strong><br>
+       - love the movement, gunplay, and SKINS!!<br>
+      feel free to add me on <a href="https://steamcommunity.com/profiles/76561199803293763" target="_blank" rel="noopener noreferrer"
+   style="text-shadow: none;">
+   steam</a>
+        if u want to play :3
+    </div>
+</div>
+<div class="info-text">
+  <p><div class="section">
+      dealing with a teeny tiny drug problem but blehh :p<br>
+</div>
+</div>
+    <br><hr>
+  </div>
+</body>
+</html>
